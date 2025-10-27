@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberhack_Massamba - Hacker Éthique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables CSS pour le thème hacker */
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #00cc00;
+            --background-color: #0a0a0a;
+            --card-bg: rgba(10, 20, 10, 0.85);
+            --text-color: #e0e0e0;
+            --glow-color: rgba(0, 255, 0, 0.7);
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Image de fond avec overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1524860769472-246b6afea403?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.15;
+            z-index: -2;
+        }
+
+        /* Overlay sombre pour améliorer la lisibilité */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(5, 5, 5, 0.9) 0%, rgba(10, 20, 10, 0.8) 100%);
+            z-index: -1;
+        }
+
+        /* Effet de scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Effet de bruit */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 101;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(5, 10, 5, 0.9);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--glow-color);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pseudo {
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--glow-color);
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pseudo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color);
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--primary-color);
+            }
+            to {
+                text-shadow: 0 0 15px var(--primary-color), 0 0 20px var(--glow-color);
+            }
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 10px;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+            box-shadow: 0 0 5px var(--glow-color);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+            position: relative;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            text-align: center;
+            text-shadow: 0 0 10px var(--glow-color);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        /* Section Hero/Présentation */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            opacity: 0;
+            transition: all 0.5s ease;
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .profile-image:hover::before {
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px var(--glow-color); }
+            50% { box-shadow: 0 0 30px var(--glow-color); }
+            100% { box-shadow: 0 0 20px var(--glow-color); }
+        }
+
+        .profile-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--glow-color);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 0 30px var(--glow-color);
+        }
+
+        .profile-info {
+            flex: 2;
+            min-width: 300px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .profile-info.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .profile-info h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .profile-info p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Section Certificats */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .certificate-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            cursor: pointer;
+        }
+
+        .certificate-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .certificate-card:hover::before {
+            left: 100%;
+        }
+
+        .certificate-card:hover {
+            transform: translateZ(20px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .certificate-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .certificate-card p {
+            margin-bottom: 5px;
+        }
+
+        /* Section Compétences */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .skill-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-card:hover {
+            transform: translateZ(20px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .skill-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .skill-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .skill-card:hover .skill-image img {
+            transform: scale(1.1);
+        }
+
+        .skill-info {
+            padding: 20px;
+        }
+
+        .skill-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-list li:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .skill-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Section Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateZ(20px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 255, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(5, 10, 5, 0.9);
+            padding: 40px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .copyright {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animation de texte qui tape */
+        .typing-text {
+            overflow: hidden;
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        /* Effet de particules */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 5s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Boutons interactifs */
+        .btn-hacker {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--primary-color);
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hacker:hover {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--primary-color);
+            box-shadow: 0 0 10px var(--glow-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-hacker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-hacker:hover::before {
+            left: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+
+            .pseudo {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero {
+                flex-direction: column;
+            }
+            
+            .profile-info {
+                transform: translateY(30px);
+            }
+            
+            .skills-container,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effets visuels -->
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="particles" id="particles-container"></div>
+
+    <!-- Header avec navigation -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="pseudo" id="main-pseudo">Cyberhack_Massamba</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#about">À Propos</a></li>
+                        <li><a href="#certificates">Certificats</a></li>
+                        <li><a href="#skills">Compétences</a></li>
+                        <li><a href="#projects">Projets</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section À Propos -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">À Propos</h2>
+            <div class="hero">
+                <div class="profile-image">
+                    <!-- Image de profil - Remplacez par votre image -->
+                    <img src="https://media.istockphoto.com/id/881365580/photo/hacker-using-laptop.jpg?s=2048x2048&w=is&k=20&c=Ge8I9UMURZ3GKLLwXUifl8Q43DFnBSm4f0Z4ZoxngKU=" alt="Cyberhack_Massamba" id="profile-pic">
+                    <input type="file" id="profile-upload" accept="image/*" style="display: none;" onchange="previewImage(event, 'profile-pic')">
+                </div>
+                <div class="profile-info">
+                    <h2 class="typing-text">Hacker Éthique - Offensive & Défensive</h2>
+                    <p>Formateur en Cybersecurite , Pentester & Soc analyst Junior.</p>
+                    <p>Spécialiste en cybersécurité avec plus de 2 ans d'expérience dans les tests d'intrusion, l'analyse de vulnérabilités et la mise en place de stratégies de défense.</p>
+                    <p>Passionné par la recherche de failles de sécurité et le développement de contre-mesures efficaces.</p>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn-hacker" onclick="showTerminal()">Terminal</button>
+                        <button class="btn-hacker" onclick="startMatrix()">Matrix Effect</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Certificats -->
+    <section id="certificates">
+        <div class="container">
+            <h2 class="section-title">Certificats</h2>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <h3>CEH - Certified Ethical Hacker</h3>
+                    <p><strong>Organisme:</strong> EC-Council</p>
+                    <p><strong>Date:</strong> 2023</p>
+                    <p><strong>Niveau:</strong> International</p>
+                </div>
+                <div class="certificate-card">
+                    <h3>OSCP - Offensive Security Certified Professional</h3>
+                    <p><strong>Organisme:</strong> Offensive Security</p>
+                    <p><strong>Date:</strong> 2024</p>
+                    <p><strong>Niveau:</strong> International</p>
+                </div>
+                <div class="certificate-card">
+                    <h3>CISSP - Certified Information Systems Security Professional</h3>
+                    <p><strong>Organisme:</strong> (ISC)²</p>
+                    <p><strong>Date:</strong> 2024</p>
+                    <p><strong>Niveau:</strong> International</p>
+                </div>
+                <div class="certificate-card">
+                    <h3>Espionnage Et Contre Espionnage</h3>
+                    <p><strong>Organisme:</strong> GSIMEL</p>
+                    <p><strong>Date:</strong> 2024</p>
+                    <p><strong>Niveau:</strong> National</p>
+                </div>
+                <div class="certificate-card">
+                    <h3>CompTIA Security+</h3>
+                    <p><strong>Organisme:</strong> CompTIA</p>
+                    <p><strong>Date:</strong> 2024</p>
+                    <p><strong>Niveau:</strong> International</p>
+                </div>
+                <div class="certificate-card">
+                    <h3>CCNA - Cisco Certified Network Associate</h3>
+                    <p><strong>Organisme:</strong> CISCO</p>
+                    <p><strong>Date:</strong> 2025</p>
+                    <p><strong>Niveau:</strong> International</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Mes Compétences</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-image">
+                        <img src="https://media.istockphoto.com/id/479801072/photo/cyber-attack-a01.jpg?s=2048x2048&w=is&k=20&c=Owe68fmVsiUbEeHClymc69GzgeZ_vNt6YLS4Zg3dFsQ=" alt="Sécurité Offensive">
+                    </div>
+                    <div class="skill-info">
+                        <h3>Sécurité Offensive</h3>
+                        <ul class="skill-list">
+                            <li>Tests d'intrusion (Pentesting)</li>
+                            <li>Ingénierie sociale</li>
+                            <li>Analyse de vulnérabilités</li>
+                            <li>Exploitation de failles</li>
+                            <li>Forensique numérique</li>
+                            <li>Reverse engineering</li>
+                            <li>Injection SQL</li>
+                            <li>Attaque XSS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-image">
+                        <img src="https://media.istockphoto.com/id/1621965676/photo/email-phishing-ransomware-malware-hacker-attack.jpg?s=2048x2048&w=is&k=20&c=3H_vSmBPSlVAMIHbEkzyhmhlU6cEKYO-7gllA_YIiRE=" alt="Sécurité Défensive">
+                    </div>
+                    <div class="skill-info">
+                        <h3>Sécurité Défensive</h3>
+                        <ul class="skill-list">
+                            <li>Architecture de sécurité</li>
+                            <li>Détection et réponse aux incidents</li>
+                            <li>Gestion des identités et accès</li>
+                            <li>Sécurité des réseaux</li>
+                            <li>Chiffrement et cryptographie</li>
+                            <li>Audit de conformité</li>
+                            <li>Sécurité hadware</li>
+                            <li>Sécurité software</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-image">
+                        <img src="https://media.istockphoto.com/id/1345797360/vector/system-hacked-warning-alert-message-on-screen.jpg?s=2048x2048&w=is&k=20&c=qzB1s27cFGwDE_zQDBqNcFSpP6TW2gFuKKI4AZcl2rE=" alt="Outils & Technologies">
+                    </div>
+                    <div class="skill-info">
+                        <h3>Outils & Technologies</h3>
+                        <ul class="skill-list">
+                            <li>Metasploit, Burp Suite, Nmap</li>
+                            <li>Wireshark, Snort, Suricata</li>
+                            <li>Kali Linux, Rat , sqlmap</li>
+                            <li>Python, Bash, PowerShell</li>
+                            <li>SIEM (Splunk, ELK) , Nessus</li>
+                            <li>Docker, RedTiger , HackTools</li>
+                            <li>Burpsuit , hydra</li>
+                            <li>Aircrack-ng , Wifite</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Projets -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://media.istockphoto.com/id/1128503636/photo/binary-code-inspection.jpg?s=2048x2048&w=is&k=20&c=Q_SjSWEFJsv4yUHFM3SjURbnhPJdxwxzffmG0YflzSA= " alt="Projet 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>Audit de sécurité d'une infrastructure reseau</h3>
+                        <p>Évaluation complète de la sécurité d'une infrastructure reseau pour une entreprise financière en local.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://media.istockphoto.com/id/1140009057/photo/cyber-crime.jpg?s=2048x2048&w=is&k=20&c=kdwPKZW7mpW0MaA6vqSivVukbGA9xxBpjdwgAdhe6Og=" alt="Projet 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>Scan de vulnérabilités avec Nessus</h3>
+                        <p>Création d'un scanner automatisé pour identifier les failles de sécurité dans les applications web avec génération de rapports détaillés.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://media.istockphoto.com/id/1428271533/photo/businessman-using-laptop-with-login-screen.jpg?s=2048x2048&w=is&k=20&c=LrMzt8Ycw9iilAwI2P75DmYSMQ_-svO9UYqqV7d6Iqk=" alt="Projet 3">
+                    </div>
+                    <div class="project-info">
+                        <h3>Cyberhack_Massamba Bootcamp</h3>
+                        <p>L'une de mes Formations entierement dediee a la securite offensive , le pentesting , le social engineering , les Rat , etc...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer avec liens sociaux -->
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.tiktok.com/@cyberhackmassamba?_t=ZN-90uByCh0bO2&_r=1" class="social-link" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://wa.me/qr/DNPN6NB4IRHKL1" class="social-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="tel:+2250718085971" class="social-link">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Cyberhack_Massamba - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Terminal Modal -->
+    <div id="terminal-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 1000; color: var(--primary-color); font-family: 'Courier New', monospace; padding: 20px; overflow: auto;">
+        <div style="max-width: 800px; margin: 0 auto; background: rgba(10, 20, 10, 0.9); border: 1px solid var(--primary-color); border-radius: 5px; padding: 20px; box-shadow: 0 0 20px var(--glow-color);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                <div>Terminal - Cyberhack_Massamba</div>
+                <button onclick="closeTerminal()" style="background: none; border: none; color: var(--primary-color); cursor: pointer;">X</button>
+            </div>
+            <div id="terminal-output" style="height: 400px; overflow-y: auto; margin-bottom: 10px; border: 1px solid rgba(0, 255, 0, 0.3); padding: 10px;">
+                <div>> Bienvenue dans le terminal de Cyberhack_Massamba</div>
+                <div>> Tapez 'help' pour voir les commandes disponibles</div>
+            </div>
+            <div style="display: flex;">
+                <span style="color: var(--primary-color); margin-right: 5px;">></span>
+                <input type="text" id="terminal-input" style="flex: 1; background: transparent; border: none; color: var(--primary-color); outline: none; font-family: 'Courier New', monospace;" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour prévisualiser les images téléchargées
+        function previewImage(event, imgElement) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                imgElement.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Animation de défilement fluide pour les liens d'ancrage
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Effet de saisie de texte pour le titre
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // Animation au défilement avec Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observer pour les éléments à animer
+        document.querySelectorAll('.section-title, .profile-info, .certificate-card, .skill-card, .project-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Effet de terminal pour le pseudo
+        const pseudoElement = document.querySelector('.pseudo');
+        const originalPseudo = pseudoElement.textContent;
+        
+        function terminalEffect() {
+            let i = 0;
+            pseudoElement.textContent = '';
+            
+            function type() {
+                if (i < originalPseudo.length) {
+                    pseudoElement.textContent += originalPseudo.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                } else {
+                    setTimeout(deleteText, 2000);
+                }
+            }
+            
+            function deleteText() {
+                if (pseudoElement.textContent.length > 0) {
+                    pseudoElement.textContent = pseudoElement.textContent.slice(0, -1);
+                    setTimeout(deleteText, 50);
+                } else {
+                    setTimeout(type, 500);
+                }
+            }
+            
+            type();
+        }
+
+        // Génération de particules
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Position aléatoire
+                const left = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = 3 + Math.random() * 4;
+                
+                particle.style.left = `${left}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Terminal interactif
+        function showTerminal() {
+            document.getElementById('terminal-modal').style.display = 'block';
+            document.getElementById('terminal-input').focus();
+        }
+
+        function closeTerminal() {
+            document.getElementById('terminal-modal').style.display = 'none';
+        }
+
+        // Commandes du terminal
+        document.getElementById('terminal-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.toLowerCase();
+                const output = document.getElementById('terminal-output');
+                
+                // Ajouter la commande à l'output
+                output.innerHTML += `<div>> ${this.value}</div>`;
+                
+                // Traiter la commande
+                switch(command) {
+                    case 'help':
+                        output.innerHTML += `<div>Commandes disponibles: about, skills, projects, contact, clear</div>`;
+                        break;
+                    case 'about':
+                        output.innerHTML += `<div>Cyberhack_Massamba - Hacker Éthique spécialisé en sécurité offensive et défensive</div>`;
+                        break;
+                    case 'skills':
+                        output.innerHTML += `<div>Pentesting, Analyse de vulnérabilités, Reverse Engineering, Cryptographie, etc.</div>`;
+                        break;
+                    case 'projects':
+                        output.innerHTML += `<div>Audits de sécurité, Développement d'outils, Formations en cybersécurité</div>`;
+                        break;
+                    case 'contact':
+                        output.innerHTML += `<div>Email: contact@cyberhack-massamba.com | TikTok: @cyberhack_massamba</div>`;
+                        break;
+                    case 'clear':
+                        output.innerHTML = '';
+                        break;
+                    case 'matrix':
+                        startMatrix();
+                        break;
+                    default:
+                        output.innerHTML += `<div>Commande non reconnue. Tapez 'help' pour la liste des commandes.</div>`;
+                }
+                
+                // Effacer l'input
+                this.value = '';
+                
+                // Scroll vers le bas
+                output.scrollTop = output.scrollHeight;
+            }
+        });
+
+        // Effet Matrix
+        function startMatrix() {
+            const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.top = '0';
+            container.style.left = '0';
+            container.style.width = '100%';
+            container.style.height = '100%';
+            container.style.background = 'rgba(0, 0, 0, 0.8)';
+            container.style.zIndex = '9999';
+            container.style.fontFamily = 'Courier New, monospace';
+            container.style.fontSize = '16px';
+            container.style.color = '#0f0';
+            container.style.overflow = 'hidden';
+            container.style.cursor = 'pointer';
+            
+            document.body.appendChild(container);
+            
+            // Créer les colonnes
+            const columns = Math.floor(window.innerWidth / 20);
+            const drops = [];
+            
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            
+            function draw() {
+                const ctx = container;
+                ctx.innerHTML = '';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars[Math.floor(Math.random() * chars.length)];
+                    const x = i * 20;
+                    const y = drops[i] * 20;
+                    
+                    const charElement = document.createElement('div');
+                    charElement.textContent = text;
+                    charElement.style.position = 'absolute';
+                    charElement.style.left = `${x}px`;
+                    charElement.style.top = `${y}px`;
+                    charElement.style.opacity = Math.random() > 0.5 ? '1' : '0.7';
+                    
+                    container.appendChild(charElement);
+                    
+                    if (y > window.innerHeight && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    
+                    drops[i]++;
+                }
+            }
+            
+            const matrixInterval = setInterval(draw, 50);
+            
+            // Arrêter l'effet au clic
+            container.addEventListener('click', function() {
+                clearInterval(matrixInterval);
+                document.body.removeChild(container);
+            });
+        }
+
+        // Initialiser les animations
+        window.addEventListener('load', function() {
+            // Effet de particules
+            createParticles();
+            
+            // Effet de saisie pour le titre
+            const typingElement = document.querySelector('.typing-text');
+            const originalText = typingElement.textContent;
+            typeWriter(typingElement, originalText, 80);
+            
+            // Effet terminal pour le pseudo
+            setTimeout(terminalEffect, 2000);
+            
+            // Effet de glitch aléatoire sur le pseudo
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    const pseudo = document.getElementById('main-pseudo');
+                    const originalText = pseudo.textContent;
+                    const glitchChars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+                    
+                    let glitched = '';
+                    for (let i = 0; i < originalText.length; i++) {
+                        if (Math.random() > 0.8) {
+                            glitched += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                        } else {
+                            glitched += originalText[i];
+                        }
+                    }
+                    
+                    pseudo.textContent = glitched;
+                    
+                    setTimeout(() => {
+                        pseudo.textContent = originalText;
+                    }, 100);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
